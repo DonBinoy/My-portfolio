@@ -1,0 +1,55 @@
+.custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary-light);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    transform-origin: center;
+    transition: width 0.3s var(--ease-out-expo),
+        height 0.3s var(--ease-out-expo),
+        border-color 0.3s var(--ease-out-expo),
+        opacity 0.3s var(--ease-out-expo);
+    mix-blend-mode: difference;
+    opacity: 0.8;
+}
+
+.custom-cursor-ring.hovering {
+    width: 60px;
+    height: 60px;
+    border-color: var(--color-accent);
+    opacity: 1;
+}
+
+.custom-cursor-ring.clicking {
+    width: 30px;
+    height: 30px;
+    border-color: var(--color-primary);
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: calc(var(--z-cursor) + 1);
+    transform-origin: center;
+    box-shadow: 0 0 10px var(--color-primary);
+    mix-blend-mode: difference;
+}
+
+/* Hide on mobile/touch devices */
+@media (hover: none) {
+
+    .custom-cursor-ring,
+    .custom-cursor-dot {
+        display: none;
+    }
+}
