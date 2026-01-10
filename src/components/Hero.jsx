@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaArrowDown } from 'react-icons/fa';
 import Hero3D from './Hero3D';
 import './Hero.css';
+import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
-    const title = "Don Binoy";
-    const subtitle = "Graphic Designer & Frontend Developer";
+    const { theme } = useTheme();
+
+    const content = {
+        developer: {
+            title: "Don Binoy",
+            subtitle: "Frontend Developer & UX Engineer",
+            description: "Crafting scalable, high-performance digital applications with modern web technologies."
+        },
+        designer: {
+            title: "Don Binoy",
+            subtitle: "Frontend Developer & UX Engineer",
+            description: "Crafting scalable, high-performance digital applications with modern web technologies."
+        }
+    };
+
+    const { title, subtitle, description } = content[theme];
 
     const scrollToAbout = () => {
         const aboutSection = document.getElementById('about');
@@ -52,36 +67,43 @@ const Hero = () => {
                     <p className="hero-greeting">Hello, I'm</p>
                 </motion.div>
 
-                <motion.h1
-                    className="hero-title"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+                <motion.div
+                    // Removed key={theme} to prevent remounting/fading
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
                 >
-                    {title.split('').map((char, index) => (
-                        <motion.span key={index} variants={charVariants}>
-                            {char === ' ' ? '\u00A0' : char}
-                        </motion.span>
-                    ))}
-                </motion.h1>
+                    <motion.h1
+                        className="hero-title"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                    >
+                        {title.split('').map((char, index) => (
+                            <motion.span key={index} variants={charVariants}>
+                                {char === ' ' ? '\u00A0' : char}
+                            </motion.span>
+                        ))}
+                    </motion.h1>
 
-                <motion.p
-                    className="hero-subtitle"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                >
-                    {subtitle}
-                </motion.p>
+                    <motion.p
+                        className="hero-subtitle"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        {subtitle}
+                    </motion.p>
 
-                <motion.p
-                    className="hero-description"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.4 }}
-                >
-                    Crafting beautiful digital experiences through creative design and clean code
-                </motion.p>
+                    <motion.p
+                        className="hero-description"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                    >
+                        {description}
+                    </motion.p>
+                </motion.div>
 
                 <motion.div
                     className="hero-cta"

@@ -7,14 +7,17 @@
     border: 2px solid var(--color-primary-light);
     border-radius: 50%;
     pointer-events: none;
-    z-index: var(--z-cursor);
+    z-index: 2147483647;
+    /* Max Z-Index */
     transform-origin: center;
     transition: width 0.3s var(--ease-out-expo),
         height 0.3s var(--ease-out-expo),
         border-color 0.3s var(--ease-out-expo),
         opacity 0.3s var(--ease-out-expo);
-    mix-blend-mode: difference;
-    opacity: 0.8;
+    /* mix-blend-mode: difference; Disabled for better visibility */
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+    /* Subtle glow */
 }
 
 .custom-cursor-ring.hovering {
@@ -22,6 +25,8 @@
     height: 60px;
     border-color: var(--color-accent);
     opacity: 1;
+    background: rgba(236, 72, 153, 0.1);
+    /* Slight fill on hover */
 }
 
 .custom-cursor-ring.clicking {
@@ -34,15 +39,18 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    /* Slightly larger */
+    height: 8px;
     background: var(--color-primary);
+    /* Uses theme color */
     border-radius: 50%;
     pointer-events: none;
-    z-index: calc(var(--z-cursor) + 1);
+    z-index: 2147483647;
+    /* Max Z-Index */
     transform-origin: center;
     box-shadow: 0 0 10px var(--color-primary);
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; Disabled */
 }
 
 /* Hide on mobile/touch devices */

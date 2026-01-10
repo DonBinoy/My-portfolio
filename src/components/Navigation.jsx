@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useMotionValue } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import './Navigation.css';

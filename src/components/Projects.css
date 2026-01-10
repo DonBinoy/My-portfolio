@@ -1,50 +1,169 @@
+/* ... existing styles ... */
+
 .projects {
     background: var(--color-bg-primary);
+    position: relative;
+    height: 600vh;
+    /* Large height for scroll distance */
+    overflow: visible;
+    /* CRITICAL for sticky positioning */
+    z-index: 10;
+}
+
+.projects-sticky-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* CRITICAL: Ensures content starts from left */
     overflow: hidden;
-    padding-bottom: var(--spacing-4xl);
+    padding: var(--spacing-4xl) 0;
+    z-index: 20;
 }
 
 .projects-horizontal-container {
     display: flex;
-    width: 200%;
-    /* Enough room for horizontal slide */
+    width: fit-content;
     padding: var(--spacing-xl) 0;
+    will-change: transform;
+    /* Remove padding here if we handle it via transform or container */
 }
 
 .projects-grid {
     display: flex;
-    gap: var(--spacing-2xl);
-    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-3xl);
+    /* Increased gap */
+    padding: 0 var(--spacing-2xl);
+    /* Inner padding */
 }
 
 .project-wrapper {
-    flex: 0 0 500px;
-    width: 500px;
+    flex: 0 0 650px;
+    /* Increased width significantly */
+    width: 650px;
+    perspective: 1000px;
+    /* Essential for 3D tilt */
 }
 
-.project-card {
+/* New Tilt Card Styles */
+.project-tilt-card {
+    width: 100%;
+    height: 400px;
+    /* Increased height */
+    position: relative;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-card);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-tilt-content {
+    width: 100%;
     height: 100%;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    border: 2px solid var(--color-primary);
+    /* High visibility border */
+}
+
+.project-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    /* Slight zoom to prevent edge clipping on tilt */
+    transition: transform 0.5s ease-out;
+}
+
+.project-tilt-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.project-sheen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Info Section (Below Card) */
+.project-info-container {
+    margin-top: var(--spacing-lg);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.project-wrapper:hover .project-info-container {
+    opacity: 1;
+}
+
+/* We need to update Projects.jsx structure slightly to match this if strictly following BEM, 
+   but since we rely on the existing structure in Projects.jsx, let's adapt style names to match 
+   what's likely there or ensure Projects.jsx is compatible. 
+   
+   Wait, Projects.jsx uses .project-card, .project-3d-visual, etc.
+   I should remap the new styles to those classes OR update Projects.jsx.
+   Given the instruction is to update CSS to support larger dimensions, 
+   I will map existing classes to the new look where possible, 
+   but the Project3DCard now handles everything 'visual'.
+*/
+
+/* Re-styling the container that holds the card + text */
+.project-card {
+    height: auto;
+    /* Let content dictate height */
     display: flex;
     flex-direction: column;
     padding: 0;
-    overflow: hidden;
-    transition: all var(--ease-out-expo) var(--transition-base);
+    background: transparent;
+    /* Remove glass card background from wrapper */
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+    /* Allow 3D elements to pop */
 }
 
 .project-3d-visual {
     width: 100%;
-    height: 350px;
-    background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 80%);
-    position: relative;
+    height: auto;
+    /* Handled by inner component */
+    background: transparent;
+    margin-bottom: var(--spacing-lg);
 }
 
-.project-3d-card-container {
-    width: 100%;
-    height: 100%;
-}
-
+/* Text Content Styles */
 .project-content {
-    padding: var(--spacing-xl);
+    padding: 0 var(--spacing-sm);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -52,70 +171,107 @@
 
 .project-title {
     font-size: var(--font-size-3xl);
-    margin-bottom: var(--spacing-sm);
-    font-weight: 700;
+    /* Larger title */
+    margin-bottom: var(--spacing-xs);
+    font-weight: 800;
+    color: var(--color-text-primary);
 }
 
 .project-description {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-base);
-    line-height: 1.8;
-    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    max-width: 90%;
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .tag {
-    padding: var(--spacing-xs) var(--spacing-md);
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid rgba(124, 58, 237, 0.2);
-    border-radius: var(--radius-sm);
-    color: var(--color-primary-light);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 .project-actions {
     display: flex;
     gap: var(--spacing-md);
-    margin-top: auto;
-}
-
-.btn-sm {
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: var(--font-size-sm);
 }
 
 @media (max-width: 1200px) {
     .project-wrapper {
-        flex: 0 0 450px;
-        width: 450px;
+        flex: 0 0 550px;
+        width: 550px;
     }
 }
 
 @media (max-width: 768px) {
     .projects-horizontal-container {
         width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: allow;
+        /* Or whatever native scroll we want */
     }
 
     .projects-grid {
-        flex-direction: column;
-        padding: 0;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
     }
 
     .project-wrapper {
-        flex: 0 0 auto;
-        width: 100%;
+        flex: 0 0 85vw;
+        /* Full width cards on mobile */
+        width: 85vw;
     }
 
-    .project-3d-visual {
+    .project-tilt-card {
         height: 250px;
     }
+
+    .project-title {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+/* DESIGNER THEME OVERRIDES FOR projects */
+body[data-theme="designer"] .tag {
+    background: #F0F0F0;
+    border: 1px solid #E0E0E0;
+    color: #444;
+    font-weight: 600;
+}
+
+body[data-theme="designer"] .project-tilt-card {
+    background: #FFFFFF;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="designer"] .project-tilt-content {
+    border: none;
+    box-shadow: none;
+}
+
+body[data-theme="designer"] .project-content {
+    color: #1A1A1A;
+}
+
+body[data-theme="designer"] .project-title {
+    color: #1A1A1A;
+}
+
+body[data-theme="designer"] .project-description {
+    color: #555555;
+    font-weight: 400;
 }

@@ -1,0 +1,43 @@
+/* Persona Switcher */
+.persona-switcher {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: var(--z-fixed);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.persona-switcher.developer {
+    background: rgba(10, 10, 10, 0.8);
+    color: #fff;
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.persona-switcher.designer {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.switcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.switcher-label {
+    font-size: 0.9rem;
+    white-space: nowrap;
+}

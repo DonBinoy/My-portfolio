@@ -2,10 +2,12 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Changed to start */
     position: relative;
     overflow: hidden;
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-2xl) 10vw;
+    /* Added substantial side padding */
 }
 
 .hero::before {
@@ -15,7 +17,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at 70% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+    /* Adjusted gradient center */
     pointer-events: none;
 }
 
@@ -42,7 +45,8 @@
 
 .hero-content {
     max-width: 800px;
-    text-align: center;
+    text-align: left;
+    /* Changed to left */
     position: relative;
     z-index: var(--z-base);
 }
@@ -59,7 +63,8 @@
     margin-bottom: var(--spacing-md);
     line-height: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Changed to start */
     flex-wrap: wrap;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -84,7 +89,8 @@
     color: var(--color-text-dim);
     margin-bottom: var(--spacing-2xl);
     max-width: 600px;
-    margin-left: auto;
+    margin-left: 0;
+    /* Changed to 0 */
     margin-right: auto;
     line-height: 1.8;
 }
@@ -92,7 +98,8 @@
 .hero-cta {
     display: flex;
     gap: var(--spacing-lg);
-    justify-content: center;
+    justify-content: flex-start;
+    /* Changed to start */
     flex-wrap: wrap;
     margin-bottom: var(--spacing-4xl);
 }
@@ -100,7 +107,8 @@
 .scroll-indicator {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    /* Changed to start */
     gap: var(--spacing-sm);
     color: var(--color-text-dim);
     cursor: pointer;

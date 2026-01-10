@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import profileImg from '../assets/Gemini_Generated_Image_hn0imphn0imphn0i.png';
+import React, { useRef, useEffect, useState } from 'react';
+import profileImg from '../assets/ab1(1).png';
 import './About.css';
 
 const StatCounter = ({ value, label, isInView }) => {
@@ -49,11 +49,11 @@ const About = () => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
+    const mouseXSpring = useSpring(x, { stiffness: 100, damping: 20 });
+    const mouseYSpring = useSpring(y, { stiffness: 100, damping: 20 });
 
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
 
     const handleMouseMove = (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -75,82 +75,85 @@ const About = () => {
     };
 
     const stats = [
-        { label: 'Years Experience', value: '3+' },
-        { label: 'Projects Completed', value: '15+' },
-        { label: 'Happy Clients', value: '10+' }
+        { label: 'Files Shipped', value: '150+' },
+        { label: 'Happy Clients', value: '25+' },
+        { label: 'Years Experience', value: '4+' }
     ];
 
     return (
         <section id="about" className="section about" ref={ref}>
             <div className="about-bg-elements">
                 <div className="mesh-gradient"></div>
-                <div className="floating-shape shape-1"></div>
-                <div className="floating-shape shape-2"></div>
             </div>
 
             <div className="container">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="section-header"
-                >
-                    <h2 className="gradient-text">About Me</h2>
-                    <p className="section-subtitle">A blend of design and code</p>
-                </motion.div>
-
                 <div className="about-grid">
-                    <motion.div
-                        className="about-image-container"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        style={{
-                            rotateX,
-                            rotateY,
-                            transformStyle: "preserve-3d",
-                        }}
-                    >
-                        <div className="image-wrapper" style={{ transform: "translateZ(50px)" }}>
-                            <div className="image-placeholder-about">
-                                <img src={profileImg} alt="Don Binoy" className="profile-image" />
-                            </div>
-                            <div className="image-overlay-glow"></div>
-                        </div>
-                    </motion.div>
-
-                    <div className="about-info">
+                    <div className="about-content-wrapper">
                         <motion.div
-                            className="about-text-content"
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : {}}
-                            transition={{ duration: 0.8, delay: 0.4 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="section-header-minimal"
                         >
-                            <h3>Creative Designer & Developer</h3>
-                            <p className="reveal-text">
-                                I'm a passionate <strong>Graphic Designer</strong> and <strong>Frontend Developer</strong> who loves
-                                bringing ideas to life through beautiful design and clean code.
-                            </p>
-                            <p className="reveal-text">
-                                My journey in design and development has equipped me with a unique perspective that bridges
-                                the gap between aesthetics and functionality. I believe that great design should not only
-                                look good but also provide an exceptional user experience.
-                            </p>
-
-                            <div className="about-stats-grid">
-                                {stats.map((stat, index) => (
-                                    <StatCounter
-                                        key={index}
-                                        value={stat.value}
-                                        label={stat.label}
-                                        isInView={isInView}
-                                    />
-                                ))}
-                            </div>
+                            <span className="section-label">About Me</span>
+                            <h2 className="section-title-large">
+                                Crafting digital <br />
+                                <span className="highlight-text">experiences</span> that matter.
+                            </h2>
                         </motion.div>
+
+                        <motion.div
+                            className="about-description"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            <p className="lead-text">
+                                I'm Don Binoy, a creative developer obsessed with the intersection of design and engineering.
+                            </p>
+                            <p className="body-text">
+                                With a background in both graphic design and full-stack development, I build applications that not only function perfectly but feel intuitive and polished. I believe the best software is invisible—it just works.
+                            </p>
+                        </motion.div>
+
+                        <div className="about-stats-minimal">
+                            {stats.map((stat, index) => (
+                                <StatCounter
+                                    key={index}
+                                    value={stat.value}
+                                    label={stat.label}
+                                    isInView={isInView}
+                                />
+                            ))}
+                        </div>
                     </div>
+
+                    <motion.div
+                        className="about-visual-wrapper"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                    >
+                        <motion.div
+                            className="about-image-card"
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                rotateX,
+                                rotateY,
+                                transformStyle: "preserve-3d",
+                            }}
+                        >
+                            <div className="image-inner" style={{ transform: "translateZ(20px)" }}>
+                                <img src={profileImg} alt="Don Binoy" className="profile-image" />
+                                <div className="image-overlay"></div>
+                            </div>
+                            <div className="card-border"></div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
         </section>

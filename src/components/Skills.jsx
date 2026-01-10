@@ -67,7 +67,8 @@ const Skills = () => {
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="section-header"
                 >
@@ -81,7 +82,8 @@ const Skills = () => {
                             key={categoryIndex}
                             className="skill-category"
                             initial={{ opacity: 0, y: 50 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
                         >
                             <h3 className="category-title">{category.title}</h3>
@@ -89,7 +91,8 @@ const Skills = () => {
                                 className="skills-list"
                                 variants={containerVariants}
                                 initial="hidden"
-                                animate={isInView ? "visible" : "hidden"}
+                                whileInView="visible"
+                                viewport={{ once: true }}
                             >
                                 {category.skills.map((skill, skillIndex) => (
                                     <motion.div
