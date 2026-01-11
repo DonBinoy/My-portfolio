@@ -11,8 +11,8 @@ const Footer = () => {
                 <div className="footer-top">
                     <div className="footer-cta">
                         <h3 className="cta-text">Let's create something <br /> extraordinary together.</h3>
-                        <a href="mailto:contact@donbinoy.com" className="footer-email">
-                            contact@donbinoy.com
+                        <a href="mailto:donbinoy25@gmail.com" className="footer-email">
+                            donbinoy25@gmail.com
                         </a>
                     </div>
 
@@ -20,9 +20,9 @@ const Footer = () => {
                         <div className="social-group">
                             <span className="social-label">Socials</span>
                             <div className="social-links">
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
+                                <a href="https://www.instagram.com/don_binoy_/" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
+                                <a href="https://www.linkedin.com/in/don-binoy-4050b2224" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+                                <a href="https://github.com/DonBinoy" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
                             </div>
                         </div>
                     </div>

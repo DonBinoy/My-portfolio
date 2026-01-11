@@ -16,8 +16,8 @@ const Hero = () => {
         },
         designer: {
             title: "Don Binoy",
-            subtitle: "Frontend Developer & UX Engineer",
-            description: "Crafting scalable, high-performance digital applications with modern web technologies."
+            subtitle: "Brand Architect & Visual Alchemist",
+            description: "Designing minimal, high-impact brand identities and editorial web experiences."
         }
     };
 

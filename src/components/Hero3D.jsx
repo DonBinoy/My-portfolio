@@ -2,11 +2,12 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sphere, MeshDistortMaterial, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
+import { useTheme } from '../context/ThemeContext'; // Assuming useTheme is from a context
 
 const FloatingShape = ({ position, color, speed = 1, distort = 0.3 }) => {
     return (
         <Float speed={speed * 2} rotationIntensity={2} floatIntensity={2}>
-            <Sphere args={[1, 64, 64]} position={position} scale={0.5}>
+            <Sphere args={[1, 32, 32]} position={position} scale={0.5}>
                 <MeshDistortMaterial
                     color={color}
                     speed={speed}
@@ -18,7 +19,7 @@ const FloatingShape = ({ position, color, speed = 1, distort = 0.3 }) => {
     );
 };
 
-const Particles = ({ count = 1000 }) => {
+const Particles = ({ count = 1000, color = "#7C3AED" }) => {
     const points = useMemo(() => {
         const p = new Float32Array(count * 3);
         for (let i = 0; i < count; i++) {
@@ -49,7 +50,7 @@ const Particles = ({ count = 1000 }) => {
             </bufferGeometry>
             <pointsMaterial
                 size={0.02}
-                color="#7C3AED"
+                color={color}
                 transparent
                 opacity={0.6}
                 sizeAttenuation
@@ -60,6 +61,28 @@ const Particles = ({ count = 1000 }) => {
 
 const Scene = () => {
     const groupRef = useRef();
+    const { theme } = useTheme();
+
+    const colors = useMemo(() => {
+        if (theme === 'developer') {
+            return {
+                primary: "#7C3AED",   // Purple
+                secondary: "#EC4899", // Pink
+                accent: "#6B46C1",    // Indigo
+                particles: "#7C3AED",
+                ambient: 0.5,
+                point: 1
+            };
+        }
+        return {
+            primary: "#FFD700",      // Gold
+            secondary: "#DAA520",    // Goldenrod
+            accent: "#B8860B",       // DarkGoldenrod
+            particles: "#FFD700",
+            ambient: 0.8,            // Brighter for light mode
+            point: 0.5
+        };
+    }, [theme]);
 
     useFrame((state) => {
         const { mouse } = state;
