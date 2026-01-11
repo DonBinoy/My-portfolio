@@ -18,7 +18,7 @@ const SkillOrb = ({ position, color, name, icon: Icon }) => {
         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
             <group position={position}>
                 <Sphere
-                    args={[0.8, 64, 64]}
+                    args={[0.8, 32, 32]}
                     onPointerOver={() => setHovered(true)}
                     onPointerOut={() => setHovered(false)}
                     ref={meshRef}
@@ -95,7 +95,7 @@ const Skills3DScene = ({ skills }) => {
 const Skills3D = ({ skills }) => {
     return (
         <div className="skills-3d-canvas">
-            <Canvas dpr={[1, 2]}>
+            <Canvas dpr={[1, 1.5]}>
                 <PerspectiveCamera makeDefault position={[0, 0, 12]} />
                 <Skills3DScene skills={skills} />
             </Canvas>

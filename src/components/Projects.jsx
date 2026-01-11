@@ -1,59 +1,55 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Project3DCard from './Project3DCard';
-import project1Img from '../assets/ab1(2).png';
-import project2Img from '../assets/ab1(3).png';
-import project3Img from '../assets/ab1(4).png';
-import project4Img from '../assets/ab1(5).png';
+
+import project1Img from '../assets/secondskin.jpg';
+import project2Img from '../assets/4dotss.jpg';
+import project3Img from '../assets/spicekollar1.jpg';
+import project4Img from '../assets/daveai.jpg';
 import project5Img from '../assets/ab1(6).png';
-import project6Img from '../assets/ab1(7).png';
-import project7Img from '../assets/ab1(8).png';
-import project8Img from '../assets/ab1(9).png';
-import project9Img from '../assets/ab1(10).png';
-import project10Img from '../assets/ab1(11).png';
-import project11Img from '../assets/ab1(12).png';
+
+
 
 import './Projects.css';
 
-const projects = [
+export const projects = [
     {
         id: 1,
-        title: 'Precision Pharma',
+        title: 'SecondSkinStyle',
         category: 'web',
-        description: 'Advanced healthcare analytics platform with real-time data visualization and machine learning integration.',
-        tags: ['React', 'D3.js', 'Pharma'],
+        description: 'A premium B2B platform delivering custom apparel and branding solutions with a focus on enterprise-grade performance.',
+        tags: ['React', 'Next.js', 'Framer'],
         image: project1Img,
-        link: '#',
-        github: '#'
+        link: 'https://business.secondskinstyle.com/',
     },
     {
         id: 2,
-        title: 'Stride Tech',
+        title: '4dots',
         category: 'web',
-        description: 'Biometric sports performance tracking dashboard for elite athletes and clinical researchers.',
-        tags: ['React', 'Three.js', 'SportsTech'],
+        description: 'An advanced online printing hub enabling seamless print order management and customization.',
+        tags: ['React', 'Next.js', 'Redux'],
         image: project2Img,
-        link: '#',
-        github: '#'
+        link: 'https://4dots.in',
     },
     {
         id: 3,
-        title: 'DriveOps AI',
+        title: 'SpiceKollar',
         category: 'web',
-        description: 'Intelligent automotive testing and object tracking suite for autonomous vehicle development.',
-        tags: ['React', 'WebGL', 'AI'],
+        description: 'A dedicated B2B spice marketplace connecting global traders with transparent logistics and secure payments.',
+        tags: ['React', 'Vite', 'Firebase'],
         image: project3Img,
-        link: '#',
-        github: '#'
+        link: 'https://spicekollar.netlify.app/',
     },
     {
         id: 4,
-        title: 'Brand Identity Design',
+        title: 'Dave AI',
         category: 'design',
-        description: 'Complete brand identity package including logo, color palette, and brand guidelines',
-        tags: ['Illustrator', 'Branding', 'Design'],
-        image: project4Img
+        description: 'Intelligent AI virtual assistant powered by Gemini for conversational support and automated task handling.',
+        tags: ['React', 'Gemini', 'Motion'],
+        image: project4Img,
+        link: 'https://daveai.netlify.app/',
     },
     {
         id: 5,
@@ -61,7 +57,7 @@ const projects = [
         category: 'design',
         description: 'Eye-catching social media posts and promotional graphics for various brands',
         tags: ['Photoshop', 'Social Media', 'Graphics'],
-        image: project5Img
+        image: 'https://picsum.photos/seed/p5/800/600'
     },
     {
         id: 6,
@@ -69,7 +65,8 @@ const projects = [
         category: 'design',
         description: 'Creative poster designs for marketing campaigns and events',
         tags: ['Photoshop', 'Illustrator', 'Print Design'],
-        image: project6Img
+        image: 'https://picsum.photos/seed/p6/800/600',
+        github: '#'
     },
     {
         id: 7,
@@ -77,7 +74,7 @@ const projects = [
         category: 'design',
         description: 'Custom character and landscape illustrations for digital media and gaming.',
         tags: ['Concept Art', 'Procreate', 'Illustration'],
-        image: project7Img
+        image: 'https://picsum.photos/seed/p7/800/600'
     },
     {
         id: 8,
@@ -85,7 +82,7 @@ const projects = [
         category: 'web',
         description: 'Full-scale UX overhaul for a major fashion retailer, focusing on mobile-first conversion.',
         tags: ['Next.js', 'PostgreSQL', 'UX Design'],
-        image: project8Img
+        image: 'https://picsum.photos/seed/p8/800/600'
     },
     {
         id: 9,
@@ -93,7 +90,7 @@ const projects = [
         category: 'design',
         description: 'Sleek, data-rich management interface for a fintech startup SaaS platform.',
         tags: ['Figma', 'UI Design', 'Fintech'],
-        image: project9Img
+        image: 'https://picsum.photos/seed/p9/800/600'
     },
     {
         id: 10,
@@ -101,7 +98,7 @@ const projects = [
         category: 'web',
         description: 'Advanced browser-based photo editing tool with AI-powered background removal and filter generation.',
         tags: ['TensorFlow.js', 'React', 'Cloudinary'],
-        image: project10Img
+        image: 'https://picsum.photos/seed/p10/800/600'
     },
     {
         id: 11,
@@ -109,7 +106,7 @@ const projects = [
         category: 'design',
         description: 'Sleek branding and menu design for a specialty coffee roaster focusing on sustainability.',
         tags: ['InDesign', 'Branding', 'Print'],
-        image: project11Img
+        image: 'https://picsum.photos/seed/p11/800/600'
     }
 ];
 
@@ -135,37 +132,40 @@ const Projects = () => {
     const [scrollRange, setScrollRange] = useState(0);
 
     // Measure the actual width of the scrollable content
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
         const updateScrollRange = () => {
-            if (scrollRef.current && sectionRef.current) {
+            if (scrollRef.current) {
                 const scrollWidth = scrollRef.current.scrollWidth;
                 const clientWidth = window.innerWidth;
-                const range = scrollWidth - clientWidth + 50;
-                setScrollRange(range > 0 ? range : 0);
+                const range = Math.max(0, scrollWidth - clientWidth + 100);
+                setScrollRange(range);
             }
         };
 
-        // Delay measure slightly to allow AnimatePresence to settle
-        const timer = setTimeout(updateScrollRange, 100);
+        // Multiple measurements to catch dynamic layout changes
+        const timer1 = setTimeout(updateScrollRange, 100);
+        const timer2 = setTimeout(updateScrollRange, 1000);
         window.addEventListener('resize', updateScrollRange);
 
         return () => {
             window.removeEventListener('resize', updateScrollRange);
-            clearTimeout(timer);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
         }
-    }, [filteredProjects, theme]); // Re-calculate when projects change
+    }, [filteredProjects, theme]);
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start start", "end end"]
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["100px", `-${scrollRange}px`]);
+    // Start from 0 to prevent the 'stuck' initial offset glitch
+    const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
     return (
         <section id="projects" className="section projects" ref={sectionRef}>
             <div className="projects-sticky-wrapper">
-                <div className="container">
+                <div className="container" id="projects-header">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -194,10 +194,10 @@ const Projects = () => {
                             <motion.div
                                 key={project.id}
                                 className="project-wrapper"
-                                initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                                viewport={{ once: true, margin: "-10%" }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.6, delay: index * 0.05 }}
                             >
                                 <div className="project-card glass-card">
                                     <div className="project-3d-visual">
@@ -207,32 +207,42 @@ const Projects = () => {
                                     <div className="project-content">
                                         <h3 className="project-title">{project.title}</h3>
                                         <p className="project-description">{project.description}</p>
-                                        <div className="project-tags">
-                                            {project.tags.map((tag, i) => (
-                                                <span key={i} className="tag">{tag}</span>
-                                            ))}
-                                        </div>
-                                        <div className="project-actions">
-                                            {project.link && (
-                                                <motion.a
-                                                    href={project.link}
-                                                    className="btn btn-primary btn-sm"
-                                                    whileHover={{ scale: 1.05 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                >
-                                                    {theme === 'developer' ? 'Live Demo' : 'View Project'} <FaExternalLinkAlt />
-                                                </motion.a>
-                                            )}
-                                            {project.github && theme === 'developer' && (
-                                                <motion.a
-                                                    href={project.github}
-                                                    className="btn btn-outline btn-sm"
-                                                    whileHover={{ scale: 1.05 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                >
-                                                    Code <FaGithub />
-                                                </motion.a>
-                                            )}
+                                        <div className="project-footer">
+                                            <div className="project-tags">
+                                                {project.tags.map((tag, i) => (
+                                                    <span key={i} className="tag">{tag}</span>
+                                                ))}
+                                            </div>
+                                            <div className="project-actions">
+                                                {theme === 'developer' && (
+                                                    <Link
+                                                        to={`/project/${project.id}`}
+                                                        className="btn btn-outline btn-sm details-btn"
+                                                    >
+                                                        View Details →
+                                                    </Link>
+                                                )}
+                                                {project.link && (
+                                                    <motion.a
+                                                        href={project.link}
+                                                        className="btn btn-primary btn-sm"
+                                                        whileHover={{ scale: 1.05 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                    >
+                                                        {theme === 'developer' ? 'Live Demo' : 'View Project'} <FaExternalLinkAlt />
+                                                    </motion.a>
+                                                )}
+                                                {project.github && theme === 'developer' && (
+                                                    <motion.a
+                                                        href={project.github}
+                                                        className="btn btn-outline btn-sm"
+                                                        whileHover={{ scale: 1.05 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                    >
+                                                        Code <FaGithub />
+                                                    </motion.a>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
