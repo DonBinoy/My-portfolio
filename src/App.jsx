@@ -66,33 +66,71 @@ const FloatingPersonaSwitcher = () => {
     );
 };
 
-import ThemeTransition from './components/ThemeTransition';
+import Preloader from './components/Preloader';
 
-function AppContent() {
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ProjectDetails from './pages/ProjectDetails';
+import AboutDetails from './pages/AboutDetails';
+import ScrollToTop from './components/ScrollToTop';
+
+const AppContent = () => {
     useSmoothScroll();
+    const { theme } = useTheme();
 
     return (
         <div className="App">
-            <ThemeTransition />
             <CustomCursor />
             <Navigation />
             <FloatingPersonaSwitcher />
             <main>
-                <Hero />
-                <About />
-                <Skills />
-                <Projects />
-                <Contact />
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <Hero />
+                            <Projects />
+                            <About />
+                            <Skills />
+                            <Contact />
+                        </>
+                    } />
+                    <Route
+                        path="/project/:id"
+                        element={theme === 'developer' ? <ProjectDetails /> : <Navigate to="/" replace />}
+                    />
+                    <Route
+                        path="/about-details"
+                        element={<AboutDetails />}
+                    />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
             </main>
             <Footer />
         </div>
     );
-}
+};
 
 function App() {
+    const [isLoading, setIsLoading] = React.useState(true);
+
     return (
         <ThemeProvider>
-            <AppContent />
+            <Router>
+                <ScrollToTop />
+                <AnimatePresence mode="wait">
+                    {isLoading ? (
+                        <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+                    ) : (
+                        <motion.div
+                            key="content"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                        >
+                            <AppContent />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </Router>
         </ThemeProvider>
     );
 }

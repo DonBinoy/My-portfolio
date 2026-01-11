@@ -80,13 +80,13 @@ const Contact = () => {
         {
             name: 'Instagram',
             icon: FaInstagram,
-            url: 'https://instagram.com',
+            url: 'https://www.instagram.com/don_binoy_/',
             color: '#E4405F'
         },
         {
             name: 'LinkedIn',
             icon: FaLinkedin,
-            url: 'https://linkedin.com',
+            url: 'https://www.linkedin.com/in/don-binoy-4050b2224',
             color: '#0A66C2'
         },
         {
@@ -134,7 +134,7 @@ const Contact = () => {
                                 </motion.div>
                                 <motion.div className="contact-method-card glass-card" whileHover={{ x: 10 }}>
                                     <span className="method-label">Send Email</span>
-                                    <a href="mailto:contact@donbinoy.com" className="method-link">contact@donbinoy.com</a>
+                                    <a href="mailto:donbinoy25@gmail.com" className="method-link">donbinoy25@gmail.com</a>
                                 </motion.div>
                             </div>
 

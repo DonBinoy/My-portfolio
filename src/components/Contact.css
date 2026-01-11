@@ -63,28 +63,52 @@
 
 .social-magnetic-container {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
 }
 
 .social-link {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    background: var(--color-bg-glass);
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    background: rgba(124, 58, 237, 0.05);
+    border: 2px solid rgba(124, 58, 237, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size-2xl);
+    font-size: 1.75rem;
     color: var(--color-text-primary);
     backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--social-color);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
 }
 
 .social-link:hover {
     color: white;
-    background: var(--social-color);
     border-color: var(--social-color);
-    box-shadow: 0 0 30px var(--social-color);
+    box-shadow: 0 0 40px var(--social-color),
+        0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.social-link:hover::before {
+    opacity: 1;
+}
+
+.social-link:active {
+    transform: translateY(-2px) scale(1.02);
 }
 
 .contact-form-container {
@@ -223,4 +247,31 @@
     .contact-form {
         padding: var(--spacing-xl);
     }
+
+    .social-link {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .social-magnetic-container {
+        gap: var(--spacing-md);
+    }
+}
+
+/* Designer Theme Overrides */
+body[data-theme="designer"] .social-link {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #1A1A1A;
+}
+
+body[data-theme="designer"] .social-link:hover {
+    border-color: var(--social-color);
+    box-shadow: 0 0 40px var(--social-color),
+        0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+body[data-theme="designer"] .social-link:hover::before {
+    opacity: 1;
 }

@@ -71,33 +71,46 @@
 .social-links {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
 }
 
 .social-link {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
+    font-weight: 600;
     color: var(--color-text-primary);
-    position: relative;
+    text-decoration: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: rgba(124, 58, 237, 0.08);
+    border: 1.5px solid rgba(124, 58, 237, 0.2);
+    border-radius: var(--radius-full);
     width: fit-content;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
-.social-link::after {
+.social-link::before {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
 }
 
 .social-link:hover {
-    color: var(--color-primary-light);
+    color: #fff;
+    background: var(--gradient-primary);
+    border-color: var(--color-primary);
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
 }
 
-.social-link:hover::after {
-    width: 100%;
+.social-link:hover::before {
+    left: 100%;
 }
 
 /* Brand Section */
@@ -173,4 +186,18 @@
     .giant-brand-text {
         -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
     }
+}
+
+/* Designer Theme Overrides */
+body[data-theme="designer"] .social-link {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #1A1A1A;
+}
+
+body[data-theme="designer"] .social-link:hover {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    border-color: #FF6B6B;
+    color: white;
+    box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
 }

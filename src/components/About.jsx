@@ -1,6 +1,8 @@
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import React, { useRef, useEffect, useState } from 'react';
-import profileImg from '../assets/ab1(1).png';
+import { Link } from 'react-router-dom';
+// import profileImg from '../assets/ab1(1).png';
+const profileImg = 'https://picsum.photos/seed/profile/800/1000';
 import './About.css';
 
 const StatCounter = ({ value, label, isInView }) => {
@@ -128,6 +130,18 @@ const About = () => {
                                 />
                             ))}
                         </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            style={{ marginTop: 'var(--spacing-2xl)' }}
+                        >
+                            <Link to="/about-details" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                                Learn More About Me
+                            </Link>
+                        </motion.div>
                     </div>
 
                     <motion.div
@@ -148,7 +162,13 @@ const About = () => {
                             }}
                         >
                             <div className="image-inner" style={{ transform: "translateZ(20px)" }}>
-                                <img src={profileImg} alt="Don Binoy" className="profile-image" />
+                                <img
+                                    src={profileImg}
+                                    alt="Don Binoy"
+                                    className="profile-image"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
                                 <div className="image-overlay"></div>
                             </div>
                             <div className="card-border"></div>
