@@ -8,7 +8,7 @@ import project1Img from '../assets/secondskin.jpg';
 import project2Img from '../assets/4dotss.jpg';
 import project3Img from '../assets/spicekollar1.jpg';
 import project4Img from '../assets/daveai.jpg';
-import project5Img from '../assets/ab1(6).png';
+
 
 
 
