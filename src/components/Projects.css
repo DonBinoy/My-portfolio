@@ -38,6 +38,7 @@
     padding: var(--spacing-sm) 0;
     /* Reduced top/bottom padding to tighten gap */
     flex-shrink: 0;
+    will-change: transform;
     /* Removed will-change to prevent conflicts with 3D transforms */
     transform: translate3d(0, 0, 0);
     /* Force GPU acceleration */

@@ -63,10 +63,10 @@ const AboutDetails = () => {
                         transition={{ delay: 0.1 }}
                     >
                         <div className="tile-content">
-                            <h1 className="gradient-text">{personalInfo.name}</h1>
-                            <p className="hero-title">{personalInfo.title}</p>
-                            <p className="hero-summary">{personalInfo.summary}</p>
-                            <div className="social-links">
+                            <h1 className="gradient-text bento-name">{personalInfo.name}</h1>
+                            <p className="bento-subtitle">{personalInfo.title}</p>
+                            <p className="bento-summary">{personalInfo.summary}</p>
+                            <div className="bento-social-links">
                                 <a href="#"><FaLinkedin /></a>
                                 <a href="#"><FaGithub /></a>
                                 <a href="#"><FaEnvelope /></a>

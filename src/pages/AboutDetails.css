@@ -114,36 +114,36 @@
 }
 
 /* Content Styling */
-.bento-hero h1 {
+.bento-hero .bento-name {
     font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 8px;
 }
 
-.hero-title {
+.bento-subtitle {
     font-size: 1.2rem;
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-lg);
 }
 
-.hero-summary {
+.bento-summary {
     color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: var(--spacing-xl);
 }
 
-.social-links {
+.bento-social-links {
     display: flex;
     gap: 15px;
 }
 
-.social-links a {
+.bento-social-links a {
     font-size: 1.4rem;
     color: var(--color-text-muted);
     transition: color 0.3s ease;
 }
 
-.social-links a:hover {
+.bento-social-links a:hover {
     color: var(--color-primary);
 }
 

@@ -137,20 +137,30 @@ const Projects = () => {
             if (scrollRef.current) {
                 const scrollWidth = scrollRef.current.scrollWidth;
                 const clientWidth = window.innerWidth;
-                const range = Math.max(0, scrollWidth - clientWidth + 100);
+                // Add a small buffer to ensure the last card is fully visible
+                const range = Math.max(0, scrollWidth - clientWidth + (clientWidth * 0.1));
                 setScrollRange(range);
             }
         };
 
-        // Multiple measurements to catch dynamic layout changes
-        const timer1 = setTimeout(updateScrollRange, 100);
-        const timer2 = setTimeout(updateScrollRange, 1000);
+        const resizeObserver = new ResizeObserver(() => {
+            updateScrollRange();
+        });
+
+        if (scrollRef.current) {
+            resizeObserver.observe(scrollRef.current);
+        }
+
+        // Catch initial load
+        updateScrollRange();
+        const timer = setTimeout(updateScrollRange, 500);
+
         window.addEventListener('resize', updateScrollRange);
 
         return () => {
             window.removeEventListener('resize', updateScrollRange);
-            clearTimeout(timer1);
-            clearTimeout(timer2);
+            resizeObserver.disconnect();
+            clearTimeout(timer);
         }
     }, [filteredProjects, theme]);
 
@@ -159,7 +169,7 @@ const Projects = () => {
         offset: ["start start", "end end"]
     });
 
-    // Start from 0 to prevent the 'stuck' initial offset glitch
+    // Start from exactly 0 to prevent the 'stuck' initial offset glitch
     const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
     return (
